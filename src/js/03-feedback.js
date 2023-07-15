@@ -2,7 +2,7 @@ import { throttle } from 'lodash';
 
 const LOCAL_KEY = 'feedback-form-state';
 
-form = document.querySelector('.feedback-form');
+const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', throttle(onInputData, 500));
 form.addEventListener('submit', onFormSubmit);
@@ -25,11 +25,13 @@ function reloadPage() {
 
 function onFormSubmit(e) {
   e.preventDefault();
-  console.log({ email: email.value, message: message.value });
+  const data = { email: email.value, message: message.value };
 
   if (email.value === '' || message.value === '') {
     return alert('Please fill in all the fields!');
   }
+
+  console.log(data);
 
   localStorage.removeItem(LOCAL_KEY);
   e.currentTarget.reset();
